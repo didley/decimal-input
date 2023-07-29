@@ -1,0 +1,11 @@
+node_modules/
+dist/
+npm-debug.*
+yarn-error.log
+
+# npm & pnpm lock files (use yarn)
+package-lock.json
+pnpm-lock.yaml
+
+# macOS
+.DS_Store
