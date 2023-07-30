@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { SafeIntOrFloat, decimalInput } from './index';
+import { SafeIntOrFloat, decimalInput } from './decimalInput';
 
 type DecimalInput = typeof decimalInput;
 type Params = Parameters<DecimalInput>;
