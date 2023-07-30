@@ -5,7 +5,7 @@
   "main": "./dist/decimalInput.js",
   "types": "./dist/decimalInput.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf ./dist && tsc --build",
     "tsWatch": "tsc --watch",
     "lint": "eslint .",
     "test": "vitest",
