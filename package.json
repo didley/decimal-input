@@ -2,7 +2,8 @@
   "name": "@didley/decimal-input",
   "version": "1.0.0",
   "description": "Util for dealing with decimal inputs fields",
-  "main": "index.js",
+  "main": "./dist/decimalInput.js",
+  "types": "./dist/decimalInput.d.ts",
   "scripts": {
     "build": "tsc",
     "tsWatch": "tsc --watch",
