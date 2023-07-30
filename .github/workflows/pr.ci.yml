@@ -19,9 +19,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Check build is updated (run yarn build)
-        run: git diff --exit-code
-
       - name: Install dependencies
         run: yarn install
 
@@ -30,6 +27,9 @@ jobs:
 
       - name: Run build
         run: yarn run build
+
+      - name: Check build is updated (run yarn build)
+        run: git diff --exit-code
 
       - name: Run tests
         run: yarn run test
