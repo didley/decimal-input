@@ -1,0 +1,32 @@
+name: On Push CI
+
+on: push
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [lts/*, current]
+
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run linter
+        run: yarn run lint
+
+      - name: Run build
+        run: yarn run build
+
+      - name: Run tests
+        run: yarn run test
