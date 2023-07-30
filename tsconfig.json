@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "lib": ["ESNext"],
-    "target": "ESNext",
+    "target": "ES6",
     "strict": true,
     "declaration": true,
     "rootDir": "./src",

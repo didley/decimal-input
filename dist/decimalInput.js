@@ -40,7 +40,8 @@ function parseInput(input) {
     }
     return parsed;
     function hasLeadingZeros() {
-        return ((parsed.split('.')[0]?.length ?? parsed.length) >= 2 && parsed[0] === '0');
+        var _a, _b;
+        return (((_b = (_a = parsed.split('.')[0]) === null || _a === void 0 ? void 0 : _a.length) !== null && _b !== void 0 ? _b : parsed.length) >= 2 && parsed[0] === '0');
     }
 }
 function isSafeIntOrFloat(input) {
