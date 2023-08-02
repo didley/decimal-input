@@ -31,9 +31,6 @@
     "typescript": "^5.1.6",
     "vitest": "^0.33.0"
   },
-  "files": [
-    "dist"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/didley/decimal-input.git"
