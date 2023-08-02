@@ -1,9 +1,15 @@
-/** @see https://egghead.io/blog/using-branded-types-in-typescript */
+/**
+ * A branded type to allow strong typing of a decimal(float) value.
+ *
+ * You can use `isSafeIntOrFloat` to determine if a value or assert with `as SafeIntOrFloat` if you're sure.
+ *
+ * @see {@link https://egghead.io/blog/using-branded-types-in-typescript | Branded types explication}
+ */
 type SafeIntOrFloat = number & { __type: 'SafeIntOrFloat' };
 
-type ReturnType<Float extends SafeIntOrFloat | number> =
+type DecimalInputReturnType<F extends SafeIntOrFloat | number> =
   | {
-      float: Float;
+      float: F;
       value: string;
       valid: true;
     }
@@ -13,27 +19,50 @@ type ReturnType<Float extends SafeIntOrFloat | number> =
       valid: false;
     };
 
-type Options = { min?: number; max?: number; decimalPlaces?: number };
+type Options = {
+  /** Minimum input number to be valid */
+  min?: number;
+  /** Maximum input number to be valid */
+  max?: number;
+  /** Number of decimal input to be valid */
+  decimalPlaces?: number;
+};
 
-function decimalInput<Float extends SafeIntOrFloat | number = SafeIntOrFloat>(
-  input: string,
+/**
+ * `decimalInput` parses & validates a decimal string returning a valid decimal string & number else invalid.
+ * @example
+```ts
+function handleChange(event) {
+  const decimal = decimalInput(event.target.value)
+  
+  if(decimal.valid){
+    setInputValue(decimal.value)
+    setFloatValue(decimal.float)
+  }
+}
+```
+ */
+function decimalInput<F extends SafeIntOrFloat | number = SafeIntOrFloat>(
+  /** Your inputs value */
+  value: string,
   opts: Options = {}
-): ReturnType<Float> {
-  const value = parseInput(input);
-  const float = Number(value);
+): DecimalInputReturnType<F> {
+  const parsedValue = parseInput(value);
+  const float = Number(parsedValue);
 
   const valid =
-    validateInput(value, opts.decimalPlaces) && validateFloat(float, opts);
+    validateInput(parsedValue, opts.decimalPlaces) &&
+    validateFloat(float, opts);
 
   return valid
-    ? { float: float as Float, value, valid }
+    ? { float: float as F, value: parsedValue, valid }
     : { float: undefined, value: undefined, valid: false };
 }
 
-function validateFloat<Return extends SafeIntOrFloat | number = SafeIntOrFloat>(
+function validateFloat<R extends SafeIntOrFloat | number = SafeIntOrFloat>(
   input: unknown,
   opts: Options = {}
-): input is Return {
+): input is R {
   if (typeof input !== 'number') {
     return false;
   }

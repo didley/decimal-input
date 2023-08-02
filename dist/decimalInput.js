@@ -1,9 +1,26 @@
-function decimalInput(input, opts = {}) {
-    const value = parseInput(input);
-    const float = Number(value);
-    const valid = validateInput(value, opts.decimalPlaces) && validateFloat(float, opts);
+/**
+ * `decimalInput` parses & validates a decimal string returning a valid decimal string & number else invalid.
+ * @example
+```ts
+function handleChange(event) {
+  const decimal = decimalInput(event.target.value)
+  
+  if(decimal.valid){
+    setInputValue(decimal.value)
+    setFloatValue(decimal.float)
+  }
+}
+```
+ */
+function decimalInput(
+/** Your inputs value */
+value, opts = {}) {
+    const parsedValue = parseInput(value);
+    const float = Number(parsedValue);
+    const valid = validateInput(parsedValue, opts.decimalPlaces) &&
+        validateFloat(float, opts);
     return valid
-        ? { float: float, value, valid }
+        ? { float: float, value: parsedValue, valid }
         : { float: undefined, value: undefined, valid: false };
 }
 function validateFloat(input, opts = {}) {
