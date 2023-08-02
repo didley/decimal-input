@@ -1,6 +1,6 @@
 {
   "name": "@didley/decimal-input",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Util for dealing with decimal inputs fields",
   "main": "dist/decimalInput.js",
   "types": "dist/decimalInput.d.ts",
