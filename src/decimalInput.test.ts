@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { DecimalUtil, SafeIntOrFloat, decimalInput } from './decimalInput';
+import { SafeDecimal, decimalInput, validateFloat } from './decimalInput';
 
 const INVALID = { float: undefined, value: undefined, valid: false } as const;
 
@@ -68,13 +68,13 @@ describe('decimalInput', () => {
       // @ts-expect-error - it returns false on boolean input type
       [[true], false],
     ])('\nInput: %s\nExpected:%s', (args, expected) => {
-      expect(DecimalUtil.validateFloat(...args)).toBe(expected);
+      expect(validateFloat(...args)).toBe(expected);
     });
   });
 });
 
 // accepted generic return arguments
-decimalInput<SafeIntOrFloat>('1').float;
+decimalInput<SafeDecimal>('1').float;
 decimalInput<number>('1').float;
 
 // @ts-expect-error - it does not accept string generic return argument

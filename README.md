@@ -4,7 +4,7 @@ Utils to assist with handling decimal input fields.
 
 ## Purpose
 
-Dealing with decimal inputs can be tedious. As all HTML inputs are `string`s you need to manage two values, one for the inputs `string` value and the other for parsed decimal(float) `number`. Both need to be validated with the same validation, and the input needs to reflect the parsed `number`. A user could input `NaN` while typing a decimal eg. `Number('.')// NaN` or the parsed `number` may not reflect the input value eg. `Number('.1')// 0.1`.
+Dealing with decimal inputs can be tedious. As all HTML inputs are `string`s you need to manage two values, one for the inputs `string` value and the other for parsed decimal(int or float) `number`. Both need to be validated with the same validation, and the input needs to reflect the parsed `number`. A user could input `NaN` while typing a decimal eg. `Number('.')// NaN` or the parsed `number` may not reflect the input value eg. `Number('.1')// 0.1`.
 
 These utils ensure both values are parsed & validated correctly with helpful optional min, max & decimal place options. It also includes additional helpers to ensure your decimal values are strongly typed with the `SafeDecimal` branded type.
 
@@ -71,7 +71,7 @@ function decimalInput<T extends SafeDecimal | number = SafeDecimal>(
 
 ## `SafeDecimal` type
 
-A branded type to allow strong typing of a decimal(float) value.
+A branded type to allow strong typing of a decimal(int or float) `number` value.
 
 You can use `isSafeDecimal` to determine if a value or assert with `as SafeDecimal` if you're sure.
 

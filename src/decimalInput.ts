@@ -1,7 +1,7 @@
 /**
- * A branded type to allow strong typing of a decimal(float) value.
+ * A branded type to allow strong typing of a decimal(int or float) `number` value.
  *
- * You can use `isSafeDecimal` to determine if a value or assert with `as SafeIntOrFloat` if you're sure.
+ * You can use `isSafeDecimal` to determine if a value or assert with `as SafeDecimal` if you're sure.
  *
  * @see {@link https://egghead.io/blog/using-branded-types-in-typescript | Branded types explication}
  */
