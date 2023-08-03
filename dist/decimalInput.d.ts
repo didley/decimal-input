@@ -1,3 +1,4 @@
+type Digits = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 /**
  * This branded type to allow strong typing of a decimal(int or float) `number` value.
  *
@@ -13,7 +14,7 @@ type SafeDecimal = number & {
 /**
  * `isSafeDecimal` is a type guard to determine if a value is of type `SafeDecimal`, a `SafeDecimal` is an integer or float excluding `NaN` & `Infinity`.
  */
-declare function isSafeDecimal(input: number): input is SafeDecimal;
+declare function isSafeDecimal(input: number, digits?: Digits): input is SafeDecimal;
 type DecimalInputReturnType<D extends SafeDecimal | number> = {
     number: D;
     value: string;
@@ -29,7 +30,7 @@ type DecimalInputOptions = {
     /** Maximum input number to be valid */
     max?: number;
     /** Number of decimal places for input to be valid, defaults to 2 */
-    precision?: number;
+    digits?: Digits;
 };
 /**
  * `decimalInput` parses & validates a decimal string returning a valid decimal string & number else invalid.

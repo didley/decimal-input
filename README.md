@@ -46,7 +46,7 @@ function decimalInput<T extends SafeDecimal | number = SafeDecimal>(
     /** Maximum input number to be valid */
     max?: number;
     /** Number of decimal places for input to be valid, defaults to 2 */
-    precision?: number;
+    digits?: number;
   }
 ):
   | {
@@ -76,7 +76,7 @@ function validateDecimal<R extends SafeDecimal | number = SafeDecimal>(
     /** Maximum input number to be valid */
     max?: number;
     /** Number of decimal places for input to be valid, defaults to 2 */
-    precision?: number;
+    digits?: number;
   }
 ): input is R;
 ```

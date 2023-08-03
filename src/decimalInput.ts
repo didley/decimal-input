@@ -1,3 +1,5 @@
+type Digits = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+
 /**
  * This branded type to allow strong typing of a decimal(int or float) `number` value.
  *
@@ -12,8 +14,15 @@ type SafeDecimal = number & { __type: 'SafeDecimal' };
 /**
  * `isSafeDecimal` is a type guard to determine if a value is of type `SafeDecimal`, a `SafeDecimal` is an integer or float excluding `NaN` & `Infinity`.
  */
-function isSafeDecimal(input: number): input is SafeDecimal {
-  return (isFloat(input) || Number.isInteger(input)) && Number.isFinite(input);
+function isSafeDecimal(input: number, digits?: Digits): input is SafeDecimal {
+  const withinDigits =
+    digits !== undefined ? isWithinDecimalDigits(input, digits) : true;
+
+  return (
+    (isFloat(input) || Number.isInteger(input)) &&
+    Number.isFinite(input) &&
+    withinDigits
+  );
 
   function isFloat(n: number): boolean {
     return Number(n) === n && n % 1 !== 0;
@@ -38,7 +47,7 @@ type DecimalInputOptions = {
   /** Maximum input number to be valid */
   max?: number;
   /** Number of decimal places for input to be valid, defaults to 2 */
-  precision?: number;
+  digits?: Digits;
 };
 
 /**
@@ -64,7 +73,7 @@ function decimalInput<D extends SafeDecimal | number = SafeDecimal>(
   const number = Number(parsedValue);
 
   const valid =
-    validateInput(parsedValue, options.precision) &&
+    validateInput(parsedValue, options.digits) &&
     validateDecimal(number, options);
 
   return valid
@@ -83,9 +92,9 @@ function validateDecimal<R extends SafeDecimal | number = SafeDecimal>(
   const withinMin = opts.min === undefined ? true : input >= opts.min;
   const withinMax = opts.max === undefined ? true : input <= opts.max;
   const withinDecimalPlace =
-    opts.precision === undefined
+    opts.digits === undefined
       ? true
-      : isWithinDecimalPrecision(input, opts.precision);
+      : isWithinDecimalDigits(input, opts.digits);
 
   return withinMin && withinMax && withinDecimalPlace && isSafeDecimal(input);
 }
@@ -98,7 +107,7 @@ function validateInput(input: string, decimalPlaces?: number): boolean {
     (isSafeDecimal(asNum) &&
       input.trim() !== '00' &&
       input.trim().split('.')[1] !== '00' &&
-      isWithinDecimalPrecision(input, decimalPlaces))
+      isWithinDecimalDigits(input, decimalPlaces))
   );
 }
 
@@ -125,16 +134,16 @@ function parseInput(input: string): string {
 }
 
 /**
- * Determines if supplied input is within a given decimal place, defaults to precision of 2
- * @example isWithinDecimalPrecision(2,1.11) //true @example isWithinDecimalPrecision(2,1.111) //false
+ * Determines if supplied input is within a given decimal place, defaults to digits of 2
+ * @example isWithinDecimalDigits(2,1.11) //true @example isWithinDecimalDigits(2,1.111) //false
  */
-function isWithinDecimalPrecision(
+function isWithinDecimalDigits(
   input: number | string,
-  precision: number = 2
+  digits: number = 2
 ): boolean {
   const decimalVal = input.toString().split('.')[1];
 
-  return decimalVal !== undefined ? decimalVal.length <= precision : true;
+  return decimalVal !== undefined ? decimalVal.length <= digits : true;
 }
 
 export { decimalInput, isSafeDecimal, validateDecimal };
