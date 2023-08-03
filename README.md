@@ -6,7 +6,7 @@ Utils to assist with handling decimal input fields.
 
 Dealing with decimal inputs can be tedious. As all HTML inputs are `string`s you need to manage two values, one for the inputs `string` value and the other for parsed decimal(float) `number`. Both need to be validated with the same validation, and the input needs to reflect the parsed `number`. A user could input `NaN` while typing a decimal eg. `Number('.')// NaN` or the parsed `number` may not reflect the input value eg. `Number('.1')// 0.1`.
 
-These utils ensure both values are parsed & validated correctly with helpful optional min, max & decimal place options. It also includes additional helpers to ensure your decimal values are strongly typed with the `SafeIntOrFloat` branded type.
+These utils ensure both values are parsed & validated correctly with helpful optional min, max & decimal place options. It also includes additional helpers to ensure your decimal values are strongly typed with the `SafeDecimal` branded type.
 
 ## Installing
 
@@ -37,7 +37,7 @@ function handleChange(event) {
 ### `decimalInput` function definition
 
 ```ts
-function decimalInput<T extends SafeIntOrFloat | number = SafeIntOrFloat>(
+function decimalInput<T extends SafeDecimal | number = SafeDecimal>(
   /** Your inputs value */
   value: string,
   options?: {
@@ -65,14 +65,14 @@ function decimalInput<T extends SafeIntOrFloat | number = SafeIntOrFloat>(
 
 `validateFloat` is the same float validation used within `decimalInput`. Useful when requiring the same validation outside of `decimalInput`.
 
-## `isSafeIntOrFloat`
+## `isSafeDecimal`
 
-`isSafeIntOrFloat` is a type guard to determine if a value is of type `SafeIntOrFloat`
+`isSafeDecimal` is a type guard to determine if a value is of type `SafeDecimal`
 
-## `SafeIntOrFloat` type
+## `SafeDecimal` type
 
 A branded type to allow strong typing of a decimal(float) value.
 
-You can use `isSafeIntOrFloat` to determine if a value or assert with `as SafeIntOrFloat` if you're sure.
+You can use `isSafeDecimal` to determine if a value or assert with `as SafeDecimal` if you're sure.
 
 see [Branded types explication](https://egghead.io/blog/using-branded-types-in-typescript)

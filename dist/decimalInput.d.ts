@@ -1,14 +1,14 @@
 /**
  * A branded type to allow strong typing of a decimal(float) value.
  *
- * You can use `isSafeIntOrFloat` to determine if a value or assert with `as SafeIntOrFloat` if you're sure.
+ * You can use `isSafeDecimal` to determine if a value or assert with `as SafeIntOrFloat` if you're sure.
  *
  * @see {@link https://egghead.io/blog/using-branded-types-in-typescript | Branded types explication}
  */
-type SafeIntOrFloat = number & {
-    __type: 'SafeIntOrFloat';
+type SafeDecimal = number & {
+    __type: 'SafeDecimal';
 };
-type DecimalInputReturnType<F extends SafeIntOrFloat | number> = {
+type DecimalInputReturnType<F extends SafeDecimal | number> = {
     float: F;
     value: string;
     valid: true;
@@ -39,10 +39,10 @@ function handleChange(event) {
 }
 ```
  */
-declare function decimalInput<F extends SafeIntOrFloat | number = SafeIntOrFloat>(
+declare function decimalInput<F extends SafeDecimal | number = SafeDecimal>(
 /** Your inputs value */
 value: string, opts?: Options): DecimalInputReturnType<F>;
-declare function validateFloat<R extends SafeIntOrFloat | number = SafeIntOrFloat>(input: unknown, opts?: Options): input is R;
-declare function isSafeIntOrFloat(input: number): input is SafeIntOrFloat;
-export { decimalInput, isSafeIntOrFloat, validateFloat };
-export type { SafeIntOrFloat };
+declare function validateFloat<R extends SafeDecimal | number = SafeDecimal>(input: unknown, opts?: Options): input is R;
+declare function isSafeDecimal(input: number): input is SafeDecimal;
+export { decimalInput, isSafeDecimal, validateFloat };
+export type { SafeDecimal };
