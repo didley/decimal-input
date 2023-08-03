@@ -12,6 +12,7 @@ describe('decimalInput', () => {
     it.each<[Params, Return]>([
       // valid input
       [['', { decimalPlaces: 2 }], { float: 0, value: '', valid: true }],
+      [['0', { decimalPlaces: 2 }], { float: 0, value: '0', valid: true }],
       [['0.', { decimalPlaces: 2 }], { float: 0, value: '0.', valid: true }],
       [['.', { decimalPlaces: 2 }], { float: 0, value: '0.', valid: true }],
       [['.0', { decimalPlaces: 2 }], { float: 0, value: '0.0', valid: true }],

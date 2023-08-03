@@ -96,13 +96,11 @@ function parseInput(input: string): string {
 
   const startsWithDecimalPoint = parsed[0] === '.';
 
-  if (parsed !== '0.') {
-    if (startsWithDecimalPoint) {
-      parsed = '0' + parsed;
-    } else if (hasLeadingZeros()) {
-      while (hasLeadingZeros()) {
-        parsed = parsed.substring(1);
-      }
+  if (startsWithDecimalPoint && parsed !== '0.') {
+    parsed = '0' + parsed;
+  } else if (hasLeadingZeros()) {
+    while (hasLeadingZeros()) {
+      parsed = parsed.substring(1);
     }
   }
 
