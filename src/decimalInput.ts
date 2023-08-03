@@ -7,14 +7,14 @@
  */
 type SafeDecimal = number & { __type: 'SafeDecimal' };
 
-type DecimalInputReturnType<F extends SafeDecimal | number> =
+type DecimalInputReturnType<D extends SafeDecimal | number> =
   | {
-      float: F;
+      number: D;
       value: string;
       valid: true;
     }
   | {
-      float: undefined;
+      number: undefined;
       value: undefined;
       valid: false;
     };
@@ -42,21 +42,21 @@ function handleChange(event) {
 }
 ```
  */
-function decimalInput<F extends SafeDecimal | number = SafeDecimal>(
+function decimalInput<D extends SafeDecimal | number = SafeDecimal>(
   /** Your inputs value */
   value: string,
   opts: Options = {}
-): DecimalInputReturnType<F> {
+): DecimalInputReturnType<D> {
   const parsedValue = parseInput(value);
-  const float = Number(parsedValue);
+  const number = Number(parsedValue);
 
   const valid =
     validateInput(parsedValue, opts.decimalPlaces) &&
-    validateFloat(float, opts);
+    validateFloat(number, opts);
 
   return valid
-    ? { float: float as F, value: parsedValue, valid }
-    : { float: undefined, value: undefined, valid: false };
+    ? { number: number as D, value: parsedValue, valid }
+    : { number: undefined, value: undefined, valid: false };
 }
 
 function validateFloat<R extends SafeDecimal | number = SafeDecimal>(

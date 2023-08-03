@@ -16,12 +16,12 @@ function decimalInput(
 /** Your inputs value */
 value, opts = {}) {
     const parsedValue = parseInput(value);
-    const float = Number(parsedValue);
+    const number = Number(parsedValue);
     const valid = validateInput(parsedValue, opts.decimalPlaces) &&
-        validateFloat(float, opts);
+        validateFloat(number, opts);
     return valid
-        ? { float: float, value: parsedValue, valid }
-        : { float: undefined, value: undefined, valid: false };
+        ? { number: number, value: parsedValue, valid }
+        : { number: undefined, value: undefined, valid: false };
 }
 function validateFloat(input, opts = {}) {
     if (typeof input !== 'number') {

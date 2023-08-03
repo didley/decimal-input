@@ -8,12 +8,12 @@
 type SafeDecimal = number & {
     __type: 'SafeDecimal';
 };
-type DecimalInputReturnType<F extends SafeDecimal | number> = {
-    float: F;
+type DecimalInputReturnType<D extends SafeDecimal | number> = {
+    number: D;
     value: string;
     valid: true;
 } | {
-    float: undefined;
+    number: undefined;
     value: undefined;
     valid: false;
 };
@@ -39,9 +39,9 @@ function handleChange(event) {
 }
 ```
  */
-declare function decimalInput<F extends SafeDecimal | number = SafeDecimal>(
+declare function decimalInput<D extends SafeDecimal | number = SafeDecimal>(
 /** Your inputs value */
-value: string, opts?: Options): DecimalInputReturnType<F>;
+value: string, opts?: Options): DecimalInputReturnType<D>;
 declare function validateFloat<R extends SafeDecimal | number = SafeDecimal>(input: unknown, opts?: Options): input is R;
 declare function isSafeDecimal(input: number): input is SafeDecimal;
 export { decimalInput, isSafeDecimal, validateFloat };
