@@ -42,7 +42,7 @@ function handleChange(event) {
 declare function decimalInput<D extends SafeDecimal | number = SafeDecimal>(
 /** Your inputs value */
 value: string, opts?: Options): DecimalInputReturnType<D>;
-declare function validateFloat<R extends SafeDecimal | number = SafeDecimal>(input: unknown, opts?: Options): input is R;
+declare function validateDecimal<R extends SafeDecimal | number = SafeDecimal>(input: unknown, opts?: Options): input is R;
 declare function isSafeDecimal(input: number): input is SafeDecimal;
-export { decimalInput, isSafeDecimal, validateFloat };
+export { decimalInput, isSafeDecimal, validateDecimal };
 export type { SafeDecimal };

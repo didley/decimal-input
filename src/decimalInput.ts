@@ -52,14 +52,14 @@ function decimalInput<D extends SafeDecimal | number = SafeDecimal>(
 
   const valid =
     validateInput(parsedValue, opts.decimalPlaces) &&
-    validateFloat(number, opts);
+    validateDecimal(number, opts);
 
   return valid
     ? { number: number as D, value: parsedValue, valid }
     : { number: undefined, value: undefined, valid: false };
 }
 
-function validateFloat<R extends SafeDecimal | number = SafeDecimal>(
+function validateDecimal<R extends SafeDecimal | number = SafeDecimal>(
   input: unknown,
   opts: Options = {}
 ): input is R {
@@ -131,5 +131,5 @@ function isWithinDecimalPlaces(
     : true;
 }
 
-export { decimalInput, isSafeDecimal, validateFloat };
+export { decimalInput, isSafeDecimal, validateDecimal };
 export type { SafeDecimal };

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { SafeDecimal, decimalInput, validateFloat } from './decimalInput';
+import { SafeDecimal, decimalInput, validateDecimal } from './decimalInput';
 
 const INVALID = { number: undefined, value: undefined, valid: false } as const;
 
@@ -68,7 +68,7 @@ describe('decimalInput', () => {
       // @ts-expect-error - it returns false on boolean input type
       [[true], false],
     ])('\nInput: %s\nExpected:%s', (args, expected) => {
-      expect(validateFloat(...args)).toBe(expected);
+      expect(validateDecimal(...args)).toBe(expected);
     });
   });
 });

@@ -14,9 +14,10 @@
   },
   "keywords": [
     "decimal",
-    "util",
     "input",
+    "util",
     "float",
+    "number",
     "frontend",
     "react"
   ],

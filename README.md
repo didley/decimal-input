@@ -61,9 +61,9 @@ function decimalInput<T extends SafeDecimal | number = SafeDecimal>(
     };
 ```
 
-## `validateFloat`
+## `validateDecimal`
 
-`validateFloat` is the same float validation used within `decimalInput`. Useful when requiring the same validation outside of `decimalInput`.
+`validateDecimal` is the same decimal `number` validation used within `decimalInput`. Useful when requiring the same validation outside of `decimalInput`.
 
 ## `isSafeDecimal`
 

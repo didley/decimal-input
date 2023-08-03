@@ -18,12 +18,12 @@ value, opts = {}) {
     const parsedValue = parseInput(value);
     const number = Number(parsedValue);
     const valid = validateInput(parsedValue, opts.decimalPlaces) &&
-        validateFloat(number, opts);
+        validateDecimal(number, opts);
     return valid
         ? { number: number, value: parsedValue, valid }
         : { number: undefined, value: undefined, valid: false };
 }
-function validateFloat(input, opts = {}) {
+function validateDecimal(input, opts = {}) {
     if (typeof input !== 'number') {
         return false;
     }
@@ -72,4 +72,4 @@ function isWithinDecimalPlaces(input, places) {
         ? decimalVal.length <= places
         : true;
 }
-export { decimalInput, isSafeDecimal, validateFloat };
+export { decimalInput, isSafeDecimal, validateDecimal };
