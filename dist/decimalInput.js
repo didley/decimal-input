@@ -26,7 +26,7 @@ function decimalInput(
 value, options = {}) {
     const parsedValue = parseInput(value);
     const number = Number(parsedValue);
-    const valid = validateInput(parsedValue, options.decimalPlaces) &&
+    const valid = validateInput(parsedValue, options.precision) &&
         validateDecimal(number, options);
     return valid
         ? { number: number, value: parsedValue, valid }
@@ -38,9 +38,9 @@ function validateDecimal(input, opts = {}) {
     }
     const withinMin = opts.min === undefined ? true : input >= opts.min;
     const withinMax = opts.max === undefined ? true : input <= opts.max;
-    const withinDecimalPlace = opts.decimalPlaces === undefined
+    const withinDecimalPlace = opts.precision === undefined
         ? true
-        : isWithinDecimalPlaces(input, opts.decimalPlaces);
+        : isWithinDecimalPrecision(input, opts.precision);
     return withinMin && withinMax && withinDecimalPlace && isSafeDecimal(input);
 }
 function validateInput(input, decimalPlaces) {
@@ -49,7 +49,7 @@ function validateInput(input, decimalPlaces) {
         (isSafeDecimal(asNum) &&
             input.trim() !== '00' &&
             input.trim().split('.')[1] !== '00' &&
-            isWithinDecimalPlaces(input, decimalPlaces)));
+            isWithinDecimalPrecision(input, decimalPlaces)));
 }
 function parseInput(input) {
     let parsed = input.trim();
@@ -68,11 +68,12 @@ function parseInput(input) {
         return (((_b = (_a = parsed.split('.')[0]) === null || _a === void 0 ? void 0 : _a.length) !== null && _b !== void 0 ? _b : parsed.length) >= 2 && parsed[0] === '0');
     }
 }
-/** @example withinDecimalPlace(2,1.11) //true @example withinDecimalPlace(2,1.111) //false  */
-function isWithinDecimalPlaces(input, places) {
+/**
+ * Determines if supplied input is within a given decimal place, defaults to precision of 2
+ * @example isWithinDecimalPrecision(2,1.11) //true @example isWithinDecimalPrecision(2,1.111) //false
+ */
+function isWithinDecimalPrecision(input, precision = 2) {
     const decimalVal = input.toString().split('.')[1];
-    return decimalVal !== undefined && places !== undefined
-        ? decimalVal.length <= places
-        : true;
+    return decimalVal !== undefined ? decimalVal.length <= precision : true;
 }
 export { decimalInput, isSafeDecimal, validateDecimal };

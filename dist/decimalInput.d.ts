@@ -28,8 +28,8 @@ type DecimalInputOptions = {
     min?: number;
     /** Maximum input number to be valid */
     max?: number;
-    /** Number of decimal input to be valid */
-    decimalPlaces?: number;
+    /** Number of decimal places for input to be valid, defaults to 2 */
+    precision?: number;
 };
 /**
  * `decimalInput` parses & validates a decimal string returning a valid decimal string & number else invalid.

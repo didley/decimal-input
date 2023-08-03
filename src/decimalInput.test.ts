@@ -11,54 +11,53 @@ describe('decimalInput', () => {
   describe('decimalInput()', () => {
     it.each<[Params, Return]>([
       // valid input
-      [['', { decimalPlaces: 2 }], { number: 0, value: '', valid: true }],
-      [['0', { decimalPlaces: 2 }], { number: 0, value: '0', valid: true }],
-      [['0.', { decimalPlaces: 2 }], { number: 0, value: '0.', valid: true }],
-      [['.', { decimalPlaces: 2 }], { number: 0, value: '0.', valid: true }],
-      [['.0', { decimalPlaces: 2 }], { number: 0, value: '0.0', valid: true }],
+      [['', { precision: 2 }], { number: 0, value: '', valid: true }],
+      [['0', { precision: 2 }], { number: 0, value: '0', valid: true }],
+      [['0.', { precision: 2 }], { number: 0, value: '0.', valid: true }],
+      [['.', { precision: 2 }], { number: 0, value: '0.', valid: true }],
+      [['.0', { precision: 2 }], { number: 0, value: '0.0', valid: true }],
+      [['.01', { precision: 2 }], { number: 0.01, value: '0.01', valid: true }],
       [
-        ['.01', { decimalPlaces: 2 }],
+        ['0.01', { precision: 2 }],
         { number: 0.01, value: '0.01', valid: true },
       ],
       [
-        ['0.01', { decimalPlaces: 2 }],
-        { number: 0.01, value: '0.01', valid: true },
-      ],
-      [
-        ['-0.01', { decimalPlaces: 2 }],
+        ['-0.01', { precision: 2 }],
         { number: -0.01, value: '-0.01', valid: true },
       ],
       [
-        ['1.01', { decimalPlaces: 2 }],
+        ['1.01', { precision: 2 }],
         { number: 1.01, value: '1.01', valid: true },
       ],
       [
-        ['11111.01', { decimalPlaces: 2 }],
+        ['11111.01', { precision: 2 }],
         { number: 11111.01, value: '11111.01', valid: true },
       ],
       [
-        [' ', { decimalPlaces: 2, min: 0, max: 1 }],
+        [' ', { precision: 2, min: 0, max: 1 }],
         { number: 0, value: '', valid: true },
       ],
       [
-        [' 1', { decimalPlaces: 2, min: 0 }],
+        [' 1', { precision: 2, min: 0 }],
         { number: 1, value: '1', valid: true },
       ],
       [
-        [' 1.1', { decimalPlaces: 2, max: 2 }],
+        [' 1.1', { precision: 2, max: 2 }],
         { number: 1.1, value: '1.1', valid: true },
       ],
       [['00.'], { number: 0, value: '0.', valid: true }],
       // invalid input
-      [['1.01', { decimalPlaces: 1 }], INVALID],
-      [['1.011', { decimalPlaces: 2 }], INVALID],
-      [['1.0111', { decimalPlaces: 3 }], INVALID],
-      [['$1', { decimalPlaces: 2 }], INVALID],
-      [['1.1.1', { decimalPlaces: 2 }], INVALID],
+      [['1.01', { precision: 1 }], INVALID],
+      [['1.011', { precision: 2 }], INVALID],
+      [['1.0111', { precision: 3 }], INVALID],
+      [['$1', { precision: 2 }], INVALID],
+      [['1.1.1', { precision: 2 }], INVALID],
       // min/max options
-      [['-1', { decimalPlaces: 2, min: 0 }], INVALID],
-      [['-1', { decimalPlaces: 2, min: 10 }], INVALID],
-      [['11', { decimalPlaces: 2, max: 10 }], INVALID],
+      [['-1', { precision: 2, min: 0 }], INVALID],
+      [['-1', { precision: 2, min: 10 }], INVALID],
+      [['11', { precision: 2, max: 10 }], INVALID],
+      // it defaults to precision of 2
+      [['1.011'], INVALID],
     ])('\nInput: %s\nExpected:%s', (args, expected) => {
       expect(decimalInput(...args)).toStrictEqual(expected);
     });
@@ -67,6 +66,8 @@ describe('decimalInput', () => {
     it.each<[Params, boolean]>([
       // @ts-expect-error - it returns false on boolean input type
       [[true], false],
+      // it defaults to precision of 2
+      [['1.011'], false],
     ])('\nInput: %s\nExpected:%s', (args, expected) => {
       expect(validateDecimal(...args)).toBe(expected);
     });

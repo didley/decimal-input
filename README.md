@@ -45,8 +45,8 @@ function decimalInput<T extends SafeDecimal | number = SafeDecimal>(
     min?: number;
     /** Maximum input number to be valid */
     max?: number;
-    /** Number of decimal input to be valid */
-    decimalPlaces?: number;
+    /** Number of decimal places for input to be valid, defaults to 2 */
+    precision?: number;
   }
 ):
   | {
@@ -64,6 +64,22 @@ function decimalInput<T extends SafeDecimal | number = SafeDecimal>(
 ## `validateDecimal`
 
 `validateDecimal` is the same decimal `number` validation used within `decimalInput`. Useful when requiring the same validation outside of `decimalInput`.
+
+### `validateDecimal` function definition
+
+```ts
+function validateDecimal<R extends SafeDecimal | number = SafeDecimal>(
+  input: unknown,
+  opts?: {
+    /** Minimum input number to be valid */
+    min?: number;
+    /** Maximum input number to be valid */
+    max?: number;
+    /** Number of decimal places for input to be valid, defaults to 2 */
+    precision?: number;
+  }
+): input is R;
+```
 
 ## `isSafeDecimal`
 
