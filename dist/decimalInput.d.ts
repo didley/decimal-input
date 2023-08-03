@@ -44,9 +44,5 @@ declare function decimalInput<F extends SafeIntOrFloat | number = SafeIntOrFloat
 value: string, opts?: Options): DecimalInputReturnType<F>;
 declare function validateFloat<R extends SafeIntOrFloat | number = SafeIntOrFloat>(input: unknown, opts?: Options): input is R;
 declare function isSafeIntOrFloat(input: number): input is SafeIntOrFloat;
+export { decimalInput, isSafeIntOrFloat, validateFloat };
 export type { SafeIntOrFloat };
-declare const DecimalUtil: {
-    isSafeIntOrFloat: typeof isSafeIntOrFloat;
-    validateFloat: typeof validateFloat;
-};
-export { DecimalUtil, decimalInput };

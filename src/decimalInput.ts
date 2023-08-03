@@ -133,6 +133,5 @@ function isWithinDecimalPlaces(
     : true;
 }
 
+export { decimalInput, isSafeIntOrFloat, validateFloat };
 export type { SafeIntOrFloat };
-const DecimalUtil = { isSafeIntOrFloat, validateFloat };
-export { DecimalUtil, decimalInput };

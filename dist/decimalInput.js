@@ -72,5 +72,4 @@ function isWithinDecimalPlaces(input, places) {
         ? decimalVal.length <= places
         : true;
 }
-const DecimalUtil = { isSafeIntOrFloat, validateFloat };
-export { DecimalUtil, decimalInput };
+export { decimalInput, isSafeIntOrFloat, validateFloat };
