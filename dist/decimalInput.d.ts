@@ -34,7 +34,7 @@ function handleChange(event) {
   
   if(decimal.valid){
     setInputValue(decimal.value)
-    setFloatValue(decimal.float)
+    setDecimalValue(decimal.number)
   }
 }
 ```

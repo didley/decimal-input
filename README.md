@@ -19,7 +19,7 @@ yarn add @didley/decimal-input
 
 ## `decimalInput`
 
-`decimalInput` parses & validates a decimal string returning a valid decimal string & number else invalid. Generally you'll want to make your input have a controlled value and only update it and your stored float when `decimalInput`s return value is `true`.
+`decimalInput` parses & validates a decimal string returning a valid decimal string & number else invalid. Generally you'll want to make your input have a controlled value and only update it and your stored decimal `number` when `decimalInput`s return value is `true`.
 
 ### `decimalInput` example
 
@@ -29,7 +29,7 @@ function handleChange(event) {
 
   if (decimal.valid) {
     setInputValue(decimal.value);
-    setFloatValue(decimal.float);
+    setDecimalValue(decimal.number);
   }
 }
 ```
@@ -50,12 +50,12 @@ function decimalInput<T extends SafeDecimal | number = SafeDecimal>(
   }
 ):
   | {
-      float: T;
+      number: T;
       value: string;
       valid: true;
     }
   | {
-      float: undefined;
+      number: undefined;
       value: undefined;
       valid: false;
     };
