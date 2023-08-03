@@ -67,12 +67,14 @@ function decimalInput<T extends SafeDecimal | number = SafeDecimal>(
 
 ## `isSafeDecimal`
 
-`isSafeDecimal` is a type guard to determine if a value is of type `SafeDecimal`
+`isSafeDecimal` is a type guard to determine if a value is of type `SafeDecimal`, a `SafeDecimal` is an integer or float excluding `NaN` & `Infinity`.
 
 ## `SafeDecimal` type
 
-A branded type to allow strong typing of a decimal(int or float) `number` value.
+This branded type to allow strong typing of a decimal(int or float) `number` value.
 
-You can use `isSafeDecimal` to determine if a value or assert with `as SafeDecimal` if you're sure.
+A `SafeDecimal` is an integer or float excluding `NaN` & `Infinity`.
+
+You can use `isSafeDecimal` to determine a value or assert with `as SafeDecimal` if you're sure.
 
 see [Branded types explication](https://egghead.io/blog/using-branded-types-in-typescript)
