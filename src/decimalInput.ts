@@ -99,7 +99,7 @@ function validateDecimal<R extends SafeDecimal | number = SafeDecimal>(
   return withinMin && withinMax && withinDecimalPlace && isSafeDecimal(input);
 }
 
-function validateInput(input: string, decimalPlaces?: number): boolean {
+function validateInput(input: string, decimalPlaces?: Digits): boolean {
   const asNum = Number(input);
 
   return (
@@ -139,7 +139,7 @@ function parseInput(input: string): string {
  */
 function isWithinDecimalDigits(
   input: number | string,
-  digits: number = 2
+  digits: Digits = 2
 ): boolean {
   const decimalVal = input.toString().split('.')[1];
 
